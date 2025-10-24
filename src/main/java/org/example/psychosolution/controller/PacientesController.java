@@ -1,5 +1,6 @@
 package org.example.psychosolution.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.example.psychosolution.entity.Pacientes;
 import org.example.psychosolution.mapper.PacientesMapper;
 import org.example.psychosolution.request.PacientesRequest;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.UUID;
 
+@Slf4j
 @RestController
 @RequestMapping("/pacientes")
 public class PacientesController {
@@ -37,8 +39,15 @@ public class PacientesController {
                 .orElse(ResponseEntity.notFound().build());
     }
     @DeleteMapping("/deletar")
-    public ResponseEntity<PacientesResponse>deletarPaciente(UUID id){
+    public ResponseEntity<PacientesResponse>deletarPaciente(@PathVariable UUID id){
         pacientesService.apagarCadastro(id);
         return  ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<PacientesResponse>AtualizarPaciente(@PathVariable UUID id, @RequestBody PacientesRequest request){
+        return pacientesService.AlterarCadastro(id,PacientesMapper.toPacientes(request))
+           .map(pacientes -> ResponseEntity.ok(PacientesMapper.toPacientesResponse(pacientes)))
+            .orElse(ResponseEntity.notFound().build());
     }
 }
