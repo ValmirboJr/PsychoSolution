@@ -3,20 +3,20 @@ package org.example.psychosolution.service;
 import org.example.psychosolution.entity.Consulta;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+
 import org.example.psychosolution.repository.ConsultaRepository;
 
 
 @Service
 public class ConsultaService {
 
-    private final ConsultaRepository consultaRepository;
-
     @Autowired
-    public ConsultaService(ConsultaRepository consultaRepository) {
-        this.consultaRepository = consultaRepository;
-    }
+    private ConsultaRepository consultaRepository;
 
 
     public Consulta agendarConsulta(Consulta consulta){
@@ -33,4 +33,5 @@ public class ConsultaService {
     public List<Consulta> listarConsultas(){
         return consultaRepository.findAll();
     }
+
 }
