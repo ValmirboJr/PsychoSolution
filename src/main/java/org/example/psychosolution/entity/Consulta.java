@@ -17,7 +17,9 @@ public class Consulta {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String paciente;
+    @ManyToOne
+    @JoinColumn(name = "paciente_id")
+    private Pacientes paciente;
 
     private LocalDateTime data;
 
