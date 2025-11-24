@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="Cadastro.css">
+</head>
+<body>
+    <header></header>
+    <section id="Container">
+        <h1>Cadastre-se e encontre os melhor profissionais</h1>
+        <div id="Contentcontainer">
+            <form>
+                <div id="ContentInput">
+                    <Label class="name">Digite seu Email: </Label>
+                <input type="Email" placeholder="Digite seu e-mail" class="input"  required>
+                </div>
+                <div id="ContentInput">
+                    <Label class="name">Confirme seu Email: </Label>
+                    <input type="Email" placeholder="Digite seu e-mail" class="input"  required>
+                </div>
+                <div id="ContentInput">
+                    <label class="name">Digite um telefone para contato: </label>
+                    <input type="tel" placeholder="Digite seu telefone" class="input"  required minlength="14" maxlength="14">
+                </div>
+                <div id="ContentInput">
+                    <label class="name">Digite seu CPF: </label>
+                    <input type="text" placeholder="Digite seu CPF" class="input"  required maxlength="11" minlength="11">
+                </div>
+                <div id="ContentInput">
+                    <label class="name">Crie uma senha: </label>
+                    <input type="password" placeholder="Crie uma senha" class="input" required>
+                    <aside class="info">No minímo 6 digitos: </aside>
+                    <aside class="info">Com uma caracter especial</aside>
+                    <aside class="info">Possuir letrar maiúscula e miniscula</aside>
+                </div>
+                <div id="ContentInput">
+                    <label>Confirme sua nova senha</label>
+                    <input type="password" placeholder="Confirme a senha" class="input" required>
+                </div>
+                <input class="buttonCad" type="button" value="Cadastrar">
+            </form>
+        </div>
+    </section>
+    <footer></footer>
+</body>
+</html>
