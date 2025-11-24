@@ -1,4 +1,9 @@
 package org.example.psychosolution.config;
 
-public record JWTUserData() {
+import lombok.Builder;
+
+import java.util.UUID;
+
+@Builder
+public record JWTUserData(UUID id, String email, String senha) {
 }
