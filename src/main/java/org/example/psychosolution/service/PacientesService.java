@@ -5,6 +5,7 @@ import org.example.psychosolution.entity.Pacientes;
 import org.example.psychosolution.repository.ConsultaRepository;
 import org.example.psychosolution.repository.PacientesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -21,12 +22,23 @@ public class PacientesService {
     @Autowired
     private ConsultaRepository consultaRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     public Pacientes Registro(Pacientes pacientes) {
         if (pacientesRepository.findByEmail(pacientes.getEmail()).isPresent()) {
             throw new RuntimeException("Paciente ja existe");
         }
-        //Adicionar Depois Encriptador de senha
+        pacientes.setSenha(passwordEncoder.encode(pacientes.getSenha()));
         return pacientesRepository.save(pacientes);
+    }
+
+    public Pacientes login(Pacientes pacientes){
+   Pacientes pacienteEncontrado =  pacientesRepository.findByEmail(pacientes.getEmail()).orElseThrow(() -> new RuntimeException("Pacientes no encontrado"));
+    if (!passwordEncoder.matches(pacientes.getSenha(), pacientes.getSenha() )) {
+        throw new RuntimeException("Senha Incorreta");
+    }
+    return pacienteEncontrado;
     }
 
     public List<Pacientes> ListarPacientes() {
