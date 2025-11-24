@@ -1,6 +1,5 @@
 package org.example.psychosolution.controller;
 
-import lombok.extern.slf4j.Slf4j;
 import org.example.psychosolution.entity.Pacientes;
 import org.example.psychosolution.mapper.PacientesMapper;
 import org.example.psychosolution.request.PacientesRequest;
@@ -14,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.UUID;
 
-@Slf4j
+
 @RestController
 @RequestMapping("/pacientes")
 public class PacientesController {
@@ -49,5 +48,10 @@ public class PacientesController {
         return pacientesService.AlterarCadastro(id,PacientesMapper.toPacientes(request))
            .map(pacientes -> ResponseEntity.ok(PacientesMapper.toPacientesResponse(pacientes)))
             .orElse(ResponseEntity.notFound().build());
+    }
+    @PostMapping("/login")
+    public ResponseEntity<PacientesResponse>Login(@RequestBody PacientesRequest request){
+        Pacientes login = pacientesService.login(PacientesMapper.toPacientes(request));
+        return ResponseEntity.ok(PacientesMapper.toPacientesResponse(login));
     }
 }
